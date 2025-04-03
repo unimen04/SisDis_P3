@@ -1,0 +1,1 @@
+export { default } from "file:///home/unimen/Escritorio/SISDIS_P3/SisDis_P3/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

@@ -1,5 +1,5 @@
 <template>
-    Hello World
+    Привет, как дела!!!
 </template>
 <script setup>
 </script>
