@@ -1,21 +1,19 @@
 <template>
     <v-container>
-        <v-row class="align center">
-            <v-col>
+        <v-row>
+            <v-col cols="3">
                 <h1>Tareas</h1>
+
+                <tuna />
+
+                <TareaItem />
             </v-col>
-
-        <v-btn color="primary" @click="agregar">
-            Agregar tarea
-        </v-btn>
-
         </v-row>
     </v-container>
 </template>
 
 <script setup>
-
-    function agregar() {
-    }
+    import tuna from '@/components/tuna.vue'
+    import TareaItem from '~/components/TareaItem.vue';
 
 </script>
