@@ -169,6 +169,7 @@ declare global {
   const useShadowRoot: typeof import('vue')['useShadowRoot']
   const useSlots: typeof import('vue')['useSlots']
   const useState: typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']
+  const useTareaStore: typeof import('../../stores/TareaStore')['useTareaStore']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const useTheme: typeof import('../../node_modules/vuetify')['useTheme']
   const useTransitionState: typeof import('vue')['useTransitionState']
@@ -361,6 +362,7 @@ declare module 'vue' {
     readonly useShadowRoot: UnwrapRef<typeof import('vue')['useShadowRoot']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useState: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']>
+    readonly useTareaStore: UnwrapRef<typeof import('../../stores/TareaStore')['useTareaStore']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly useTheme: UnwrapRef<typeof import('../../node_modules/vuetify')['useTheme']>
     readonly useTransitionState: UnwrapRef<typeof import('vue')['useTransitionState']>

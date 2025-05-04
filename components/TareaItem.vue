@@ -1,3 +1,31 @@
+<script setup>
+    import { useTareaStore } from '~/stores/TareaStore'
+    import {storeToRefs} from 'pinia'
+    import { onMounted, ref } from 'vue'
+
+    const tareaStore = useTareaStore()
+    const { tareas } = storeToRefs(tareaStore)
+
+    const nuevaTarea = ref('')
+
+    onMounted(() => {
+     tareaStore.cargarTareas() // Carga las tareas desde Firestore al montar el componente
+    })
+
+    const agregarTarea = () => {
+        tareaStore.agregarTarea(nuevaTarea.value)
+        nuevaTarea.value = '' // Limpia el campo de entrada después de agregar la tarea
+    }
+
+    const eliminarTarea = (index) => {
+        tareaStore.eliminarTarea(index)
+    }
+
+    const marcarTarea = (id) => {
+        tareaStore.marcarTarea(id)
+    }
+</script>
+
 <template>
     <v-container>
         <v-text-field
@@ -12,17 +40,26 @@
     <v-list>
       <v-list-item
         v-for="(tarea, index) in tareas"
-        :key="index"
+        :key="tarea.id"
       >
-        <v-list-item-content>
-          <v-list-item-title>{{ tarea.name }}</v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-action>
-            <v-btn icon :color="tarea.completado ? 'green' : 'red'" @click="marcarTarea(index)">
-                <v-icon>{{ tarea.completado ? 'mdi-check' : 'mdi-close'}}</v-icon>
-            </v-btn>
+        <div class ="d-flex align-center justify-space-between">
+          <span
+            :class="{ 'tarea-completada': tarea.completado }"
+          >
+            {{ tarea.nombre }}
+          </span>
 
-          <v-btn icon color="red" @click="eliminarTarea(index)">
+          <v-checkbox
+            v-model="tarea.completado"
+            :color = "success"
+            class="tarea-checkbox"
+            @change="marcarTarea(tarea.id)"
+          ></v-checkbox>
+
+        </div>
+        <v-list-item-action>
+
+          <v-btn icon color="red" @click="eliminarTarea(tarea.id)" class="ml-3">
             <v-icon>mdi-delete</v-icon>
           </v-btn>
 
@@ -30,30 +67,10 @@
       </v-list-item>
     </v-list>
   </template>
-  
-  <script setup>
-    import { ref } from 'vue'
 
-    const tareas = ref([
-        { name: 'tarea 1', completado: false },
-        { name: 'tarea 2', completado: false },
-
-    ])
-
-    const nuevaTarea = ref('')
-
-    function agregarTarea(){
-        if(nuevaTarea.value.trim() !== ''){
-            tareas.value.push({name: nuevaTarea.value, completado: false})
-            nuevaTarea.value = ''
-        }
-    }
-
-    function eliminarTarea(index){
-        tareas.value.splice(index,1)
-    }
-
-    function marcarTarea(index){
-        tareas[index].completado = !tareas[index].completado
-    }
-</script>
+<style scoped>
+.tarea-completada {
+    text-decoration: line-through;
+    color: gray;
+}
+</style>

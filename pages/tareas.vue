@@ -14,6 +14,6 @@
 
 <script setup>
     import tuna from '@/components/tuna.vue'
-    import TareaItem from '~/components/TareaItem.vue';
+    import TareaItem from '~/components/TareaItem.vue'
 
 </script>
